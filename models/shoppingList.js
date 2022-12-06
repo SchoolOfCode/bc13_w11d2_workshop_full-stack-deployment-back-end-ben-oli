@@ -10,8 +10,13 @@ export async function getShoppingList() {
 }
 
 export async function postListItem(listItem) {
+  const { item, completed } = listItem;
+
+  if (item.length === 0) {
+    // thrown an error
+    throw Error("Please enter an item to add to the list");
+  }
   try {
-    const { item, completed } = listItem;
     const data = await pool.query(
       `INSERT INTO shopping (
         item,
@@ -21,7 +26,7 @@ export async function postListItem(listItem) {
     );
     return data.rows[0];
   } catch (error) {
-    return error;
+    console.log(error);
   }
 }
 

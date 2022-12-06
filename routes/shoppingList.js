@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
     const result = await postListItem(listItem);
     res.status(201).json({ success: true, payload: result });
   } catch (error) {
-    res.json({ success: false, error: error });
+    res.json({ success: false, error: error.message });
   }
 });
 
